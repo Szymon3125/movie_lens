@@ -1,0 +1,32 @@
+{% extends "userview/base.html" %}
+
+{% block title %}
+    MovieLens - Movie
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row row-cols-1 my-3">
+  
+        <div class="px-2 py-1">
+            <div class="card border-primary card bg-dark border-light">
+                <img src="{{ movie.imageURL }}" class="card-img-top" alt="{{ movie.title }} - baner">
+                <div class="card-body">
+                    <h4 class="card-title link-light">{{ movie.title }}</h4>
+                    <p class="card-text link-light">
+                    Genres:
+        
+                    {% for genre in movie.genres.all %}
+                        <a href="../genre/{{ genre.id }}" class="link-light">{{ genre.name }}</a>
+                    {% endfor %}
+        
+                    </p>
+                </div>
+                </div>
+        </div>
+  
+    </div>
+</div>
+
+{% endblock %}

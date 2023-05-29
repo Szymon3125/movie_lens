@@ -1,0 +1,33 @@
+{% extends "userview/base.html" %}
+
+{% block title %}
+    MovieLens - Genres
+{% endblock %}
+
+{% block content %}
+
+{% if genres %}
+    <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 my-3">
+        {% for genre in genres %}
+            <div class="px-2 py-1">
+            <div class="card bg-dark border-light">
+                <div class="card-body">
+                <h4 class="card-title">
+                    <a href="genre/{{ genre.id }}" class="link-light">
+                    {{ genre.name }}
+                    </a>
+                </h4>
+                </div>
+            </div>
+            </div>
+        {% endfor %}
+        </div>
+
+    </div>
+{% else %}
+    <p>No genres found.</p>
+{% endif %}
+
+{% endblock %}

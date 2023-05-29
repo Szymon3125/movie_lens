@@ -1,0 +1,56 @@
+{% extends "userview/base.html" %}
+
+{% block title %}
+    MovieLens - Movies
+{% endblock %}
+
+{% block content %}
+
+{% if movies %}
+    <div class="container">
+        <div class="pagination justify-content-center my-3">
+            <span class="step-links">
+                {% if movies.has_previous %}
+                    <a class="link-light mx-1" href="?page=1">&laquo; first</a>
+                    <a class="link-light mx-1" href="?page={{ movies.previous_page_number }}">previous</a>
+                {% else %}
+                    <span class="link-secondary mx-1">&laquo; first</span>
+                    <span class="link-secondary mx-1">previous</span>
+                {% endif %}
+        
+                <span class="current link-light mx-1">
+                    Page {{ movies.number }} of {{ movies.paginator.num_pages }}
+                </span>
+        
+                {% if movies.has_next %}
+                    <a class="link-light mx-1" href="?page={{ movies.next_page_number }}">next</a>
+                    <a class="link-light mx-1" href="?page={{ movies.paginator.num_pages }}">last &raquo;</a>
+                {% else %}
+                    <span class="link-secondary mx-1">next</span>
+                    <span class="link-secondary mx-1">last &raquo;</span>
+                {% endif %}
+            </span>
+        </div>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 my-3">
+        {% for movie in movies %}
+            <div class="px-2 py-1">
+            <div class="card bg-dark border-light">
+                <div class="card-body">
+                <h4 class="card-title">
+                    <a href="movie/{{ movie.id }}" class="link-light">
+                        {{ movie.title }}
+                    </a>
+                    </h4>
+                </div>
+            </div>
+            </div>
+        {% endfor %}
+        </div>
+
+    </div>
+{% else %}
+    <p>No movies found.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "userview/base.html" %}
+
+{% block title %}
+    MovieLens - Genres
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row row-cols-1 my-3">
+
+        <div class="px-2 py-1">
+            <div class="card border-primary card bg-dark border-light">
+                <div class="card-body">
+                    <h4 class="card-title link-light">Genre: {{ genre.name }}</h4>
+                    <div class="pagination justify-content-center my-3">
+                        <span class="step-links">
+                            {% if movies.has_previous %}
+                            <a class="link-light mx-1" href="?page=1">&laquo; first</a>
+                            <a class="link-light mx-1" href="?page={{ movies.previous_page_number }}">previous</a>
+                            {% else %}
+                            <span class="link-secondary mx-1">&laquo; first</span>
+                            <span class="link-secondary mx-1">previous</span>
+                            {% endif %}
+                    
+                            <span class="current link-light mx-1">
+                            Page {{ movies.number }} of {{ movies.paginator.num_pages }}
+                            </span>
+                    
+                            {% if movies.has_next %}
+                            <a class="link-light mx-1" href="?page={{ movies.next_page_number }}">next</a>
+                            <a class="link-light mx-1" href="?page={{ movies.paginator.num_pages }}">last &raquo;</a>
+                            {% else %}
+                            <span class="link-secondary mx-1">next</span>
+                            <span class="link-secondary mx-1">last &raquo;</span>
+                            {% endif %}
+                        </span>
+                    </div>
+                    <ul>
+
+                    {% for movie in movies %}
+                        <li class="my-1">
+                        <a href="../movie/{{ movie.id }}" class="link-light">{{ movie.title }}</a>
+                        </li>
+                    {% endfor %}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>  
+
+{% endblock %}
